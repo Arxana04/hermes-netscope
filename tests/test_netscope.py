@@ -456,3 +456,19 @@ def test_tool_handlers_accept_dict_arguments(sample_pcap_path):
     assert res3["ok"] is True
     assert "report_path" in res3
     assert Path(res3["report_path"]).exists()
+
+
+def test_report_dark_mode_support(sample_pcap_path):
+    """Verify dark mode CSS and theme toggle button exist in generated report."""
+    res = json.loads(handle_analyze(sample_pcap_path))
+    aid = res["analysis_id"]
+    vis = json.loads(handle_visualize(aid))
+    assert vis["ok"] is True
+
+    report_html = Path(vis["report_path"]).read_text(encoding="utf-8")
+    assert '[data-theme="dark"]' in report_html
+    assert 'prefers-color-scheme: dark' in report_html
+    assert 'theme-toggle' in report_html
+    assert 'theme-icon' in report_html
+    assert 'applyTheme' in report_html
+

@@ -16,3 +16,15 @@ htmlcov/
 .env
 media-work/
 
+
+# Heavy reference media & scratch
+*.mp4
+reference_screenshots/
+helion-landing/
+parse_*.py
+extract_*.py
+scrape_*.py
+test_helion_landing.py
+download_reference_media.py
+scripts_dump.txt
+website/
